@@ -612,6 +612,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         EditVillainButton.setText("Edit");
+        EditVillainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditVillainButtonActionPerformed(evt);
+            }
+        });
 
         editSquadButton.setText("Edit");
 
@@ -625,6 +630,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jButton6.setText("Remove");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Remove");
 
@@ -1020,29 +1030,118 @@ public class MainScreen extends javax.swing.JFrame {
           normal editableNormal = getNormalByName(editablePerson.getName());
           Main.normals.remove(editableNormal);
           Main.allPeople.remove(editableNormal);
+          Main.heroes.remove(editableNormal);
+          
       }else if(editablePerson instanceof mutant){
           
         Main.mutants.remove(getMutantByName(editablePerson.getName()));
         Main.allPeople.remove(getMutantByName(editablePerson.getName()));
+        Main.heroes.remove(getMutantByName(editablePerson.getName()));
 
           
       }else if(editablePerson instanceof radioactive){
           Main.radioactives.remove(getRadioactiveByName(editablePerson.getName()));
-          
+                  Main.allPeople.remove(getRadioactiveByName(editablePerson.getName()));
+                  Main.heroes.remove(getRadioactiveByName(editablePerson.getName()));
+
           
       }else if(editablePerson instanceof deidad){
            Main.deidades.remove(getDeidadByName(editablePerson.getName()));
-          
+                  Main.allPeople.remove(getDeidadByName(editablePerson.getName()));
+                  Main.heroes.remove(getDeidadByName(editablePerson.getName()));
+
           
       }else if(editablePerson instanceof alien){
             Main.aliens.remove(getAlienByName(editablePerson.getName()));
-         
+                 Main.allPeople.remove(getAlienByName(editablePerson.getName()));
+                 Main.heroes.remove(getAlienByName(editablePerson.getName()));
+
           
       }else if(editablePerson instanceof superHuman){
            Main.superHumans.remove(getSuperHumanByName(editablePerson.getName()));
-        
+        Main.allPeople.remove(getSuperHumanByName(editablePerson.getName()));
+        Main.heroes.remove(getSuperHumanByName(editablePerson.getName()));
+
       }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Persona editablePerson = getPersonByName(villainsListModel1.getElementAt( villainsList.getSelectedIndex()).toString());
+      
+      int selectedIndex = villainsList.getSelectedIndex();
+        if(selectedIndex != -1){
+            villainsListModel1.remove(selectedIndex);
+      }
+        
+      if(editablePerson instanceof normal){
+          normal editableNormal = getNormalByName(editablePerson.getName());
+          Main.normals.remove(editableNormal);
+          Main.allPeople.remove(editableNormal);
+        Main.villains.remove(editableNormal);
+
+          
+      }else if(editablePerson instanceof mutant){
+          
+        Main.mutants.remove(getMutantByName(editablePerson.getName()));
+        Main.allPeople.remove(getMutantByName(editablePerson.getName()));
+        Main.villains.remove(getMutantByName(editablePerson.getName()));
+
+          
+      }else if(editablePerson instanceof radioactive){
+          Main.radioactives.remove(getRadioactiveByName(editablePerson.getName()));
+                  Main.allPeople.remove(getRadioactiveByName(editablePerson.getName()));
+                  Main.villains.remove(getRadioactiveByName(editablePerson.getName()));
+
+          
+      }else if(editablePerson instanceof deidad){
+           Main.deidades.remove(getDeidadByName(editablePerson.getName()));
+                  Main.allPeople.remove(getDeidadByName(editablePerson.getName()));
+                Main.villains.remove(getDeidadByName(editablePerson.getName()));
+
+          
+      }else if(editablePerson instanceof alien){
+            Main.aliens.remove(getAlienByName(editablePerson.getName()));
+                 Main.allPeople.remove(getAlienByName(editablePerson.getName()));
+                 Main.villains.remove(getAlienByName(editablePerson.getName()));
+
+          
+      }else if(editablePerson instanceof superHuman){
+           Main.superHumans.remove(getSuperHumanByName(editablePerson.getName()));
+        Main.allPeople.remove(getSuperHumanByName(editablePerson.getName()));
+        Main.villains.remove(getSuperHumanByName(editablePerson.getName()));
+
+      }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void EditVillainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditVillainButtonActionPerformed
+        Persona editablePerson = getPersonByName(villainsListModel1.getElementAt( villainsList.getSelectedIndex()).toString());
+      
+      if(editablePerson instanceof normal){
+          normal editableNormal = getNormalByName(editablePerson.getName());
+          System.out.println(editableNormal);
+          Main.EditNormal.setFields(editableNormal);
+          Main.EditNormal.setVisible(true);
+          
+      }else if(editablePerson instanceof mutant){
+          
+          Main.EditMutant.setFields(getMutantByName(editablePerson.getName()));
+          Main.EditMutant.setVisible(true);
+          
+      }else if(editablePerson instanceof radioactive){
+          Main.EditRadioactive.setFields(getRadioactiveByName(editablePerson.getName()));
+          Main.EditRadioactive.setVisible(true);
+          
+      }else if(editablePerson instanceof deidad){
+           Main.EditDeidad.setFields(getDeidadByName(editablePerson.getName()));
+          Main.EditDeidad.setVisible(true);
+      }else if(editablePerson instanceof alien){
+            Main.EditAlien.setFields(getAlienByName(editablePerson.getName()));
+          Main.EditAlien.setVisible(true);
+      }else if(editablePerson instanceof superHuman){
+           Main.EditSuperHuman.setFields(getSuperHumanByName(editablePerson.getName()));
+          Main.EditSuperHuman.setVisible(true);
+      }
+    }//GEN-LAST:event_EditVillainButtonActionPerformed
 
    
     private mutant getMutantByName(String name){
