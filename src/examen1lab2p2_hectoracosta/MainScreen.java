@@ -637,6 +637,11 @@ public class MainScreen extends javax.swing.JFrame {
         });
 
         jButton7.setText("Remove");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Remove");
 
@@ -1142,6 +1147,17 @@ public class MainScreen extends javax.swing.JFrame {
           Main.EditSuperHuman.setVisible(true);
       }
     }//GEN-LAST:event_EditVillainButtonActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Squad editableSquad = getSquadByName( squadsListModel1.getElementAt( squadsList.getSelectedIndex()).toString() );
+        Main.squads.remove(editableSquad);
+        
+        int selectedIndex = squadsList.getSelectedIndex();
+        if(selectedIndex != -1){
+            squadsListModel1.remove(selectedIndex);
+      }
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
 
    
     private mutant getMutantByName(String name){
