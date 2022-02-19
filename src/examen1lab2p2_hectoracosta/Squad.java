@@ -10,12 +10,38 @@ public class Squad {
     private Persona leader;
     private boolean Type;
     private ArrayList<Persona> members;
+    private boolean hasUniverse;
 
     public Squad(String name, String base, Persona leader, boolean Type) {
         this.name = name;
         this.base = base;
         this.leader = leader;
         this.Type = Type;
+        this.hasUniverse = false;
+    }
+
+    public boolean isHasUniverse() {
+        return hasUniverse;
+    }
+
+    public void setHasUniverse(boolean hasUniverse) {
+        this.hasUniverse = hasUniverse;
+    }
+    
+    public Persona getLeader() {
+        return leader;
+    }
+
+    public void setLeader(Persona leader) {
+        this.leader = leader;
+    }
+
+    public ArrayList<Persona> getMembers() {
+        return members;
+    }
+
+    public void setMembers(ArrayList<Persona> members) {
+        this.members = members;
     }
     
     /**

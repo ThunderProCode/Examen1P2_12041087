@@ -11,6 +11,23 @@ public class Universe {
     public Universe(String name) {
         this.name = name;
     }
+
+    public Universe(String name, ArrayList<Squad> squads) {
+        this.name = name;
+        this.squads = squads;
+    }
+
+    
+    
+    public ArrayList<Squad> getSquads() {
+        return squads;
+    }
+
+    public void setSquads(ArrayList<Squad> squads) {
+        this.squads = squads;
+    }
+    
+    
     
     /**
      * Get the value of name

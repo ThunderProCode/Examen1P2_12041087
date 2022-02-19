@@ -12,6 +12,7 @@ import examen1lab2p2_hectoracosta.Personas.normal;
 import examen1lab2p2_hectoracosta.Personas.radioactive;
 import examen1lab2p2_hectoracosta.Personas.superHuman;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -26,7 +27,9 @@ public class MainScreen extends javax.swing.JFrame {
     DefaultListModel villainsListModel1 = new DefaultListModel();
     DefaultListModel squadsListModel1 = new DefaultListModel();
     DefaultListModel universesListModel1 = new DefaultListModel();
-    
+    DefaultListModel squadMembersListModel1 = new DefaultListModel();
+    DefaultListModel availableSquadsListModel1 = new DefaultListModel();
+    DefaultListModel universeSquadsListModel1 = new DefaultListModel();
     /**
      * Creates new form MainScreen
      */
@@ -81,19 +84,34 @@ public class MainScreen extends javax.swing.JFrame {
         superpowersInput = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        squadNameInput = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        baseInput = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        leaderInput = new javax.swing.JComboBox<>();
+        villainSquadFalse = new javax.swing.JRadioButton();
+        heroesSquadTrue = new javax.swing.JRadioButton();
         jLabel20 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         squadMembersList = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        addMember = new javax.swing.JButton();
+        removeMember = new javax.swing.JButton();
+        jLabel21 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        availablesList = new javax.swing.JList<>();
+        jPanel6 = new javax.swing.JPanel();
+        jLabel22 = new javax.swing.JLabel();
+        universeNameInput = new javax.swing.JTextField();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        universeSquadsList = new javax.swing.JList<>();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        availableSquadsList = new javax.swing.JList<>();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         heroesList = new javax.swing.JList<>();
@@ -107,11 +125,23 @@ public class MainScreen extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         universesList = new javax.swing.JList<>();
+        editHeroesButton = new javax.swing.JButton();
+        EditVillainButton = new javax.swing.JButton();
+        editSquadButton = new javax.swing.JButton();
+        editUniverseButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Name: ");
 
@@ -358,28 +388,59 @@ public class MainScreen extends javax.swing.JFrame {
 
         jLabel18.setText("Base: ");
 
-        jLabel19.setText("Lider: ");
+        jLabel19.setText("Leader");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jRadioButton1.setText("Villains Squad");
-
-        jRadioButton2.setText("Superheroes Squad");
-
-        jLabel20.setText("Members: ");
-
-        squadMembersList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        leaderInput.setEnabled(false);
+        leaderInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leaderInputActionPerformed(evt);
+            }
         });
+
+        villainSquadFalse.setText("Villains Squad");
+        villainSquadFalse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                villainSquadFalseActionPerformed(evt);
+            }
+        });
+
+        heroesSquadTrue.setText("Superheroes Squad");
+        heroesSquadTrue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                heroesSquadTrueActionPerformed(evt);
+            }
+        });
+
+        jLabel20.setText("Squad members: ");
+
         jScrollPane6.setViewportView(squadMembersList);
 
         jButton2.setText("Create");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("+");
+        addMember.setText("+");
+        addMember.setEnabled(false);
+        addMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addMemberActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("-");
+        removeMember.setText("-");
+        removeMember.setEnabled(false);
+        removeMember.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeMemberActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setText("Available persons:");
+
+        jScrollPane7.setViewportView(availablesList);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -388,37 +449,30 @@ public class MainScreen extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(leaderInput, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(squadNameInput)
+                    .addComponent(baseInput)
+                    .addComponent(jScrollPane6)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(addMember, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addComponent(removeMember, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel18)
                             .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel17)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel19))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton2)
-                        .addGap(30, 30, 30))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(33, 33, 33)
+                                .addComponent(villainSquadFalse)
+                                .addGap(18, 18, 18)
+                                .addComponent(heroesSquadTrue))
                             .addComponent(jLabel20)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel5Layout.createSequentialGroup()
-                                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addGap(0, 14, Short.MAX_VALUE))))
+                            .addComponent(jLabel21)
+                            .addComponent(jLabel19))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -426,33 +480,112 @@ public class MainScreen extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel17)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(squadNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel18)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(baseInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(heroesSquadTrue)
+                    .addComponent(villainSquadFalse))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel21)
+                .addGap(1, 1, 1)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addMember)
+                    .addComponent(removeMember))
+                .addGap(14, 14, 14)
                 .addComponent(jLabel19)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addGap(18, 18, 18)
-                .addComponent(jButton2)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addComponent(leaderInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(104, 104, 104))
         );
 
         jTabbedPane1.addTab("Create Squad", jPanel5);
+
+        jLabel22.setText("Name: ");
+
+        jScrollPane8.setViewportView(universeSquadsList);
+
+        jLabel23.setText("Universe squads: ");
+
+        jLabel24.setText("Available squads:");
+
+        jScrollPane9.setViewportView(availableSquadsList);
+
+        jButton3.setText("+");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("-");
+
+        jButton5.setText("Create");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
+                    .addComponent(universeNameInput)
+                    .addComponent(jScrollPane9)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel22)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(universeNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addGap(27, 27, 27)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(159, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Create Universe", jPanel6);
 
         heroesList.setModel(heroesListModel1);
         jScrollPane2.setViewportView(heroesList);
@@ -471,7 +604,31 @@ public class MainScreen extends javax.swing.JFrame {
 
         jScrollPane5.setViewportView(universesList);
 
-        jButton1.setText("Ver mas");
+        editHeroesButton.setText("Edit");
+        editHeroesButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editHeroesButtonActionPerformed(evt);
+            }
+        });
+
+        EditVillainButton.setText("Edit");
+
+        editSquadButton.setText("Edit");
+
+        editUniverseButton.setText("Edit");
+
+        jButton1.setText("Remove");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Remove");
+
+        jButton7.setText("Remove");
+
+        jButton8.setText("Remove");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -483,57 +640,74 @@ public class MainScreen extends javax.swing.JFrame {
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)
                     .addComponent(jScrollPane3)
                     .addComponent(jScrollPane4)
+                    .addComponent(jScrollPane5)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel14)
                             .addComponent(jLabel15)
-                            .addComponent(jLabel16))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addGap(18, 18, 18)
+                                .addComponent(editHeroesButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton6)
+                                .addGap(18, 18, 18)
+                                .addComponent(EditVillainButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(editSquadButton))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton8)
+                                .addGap(18, 18, 18)
+                                .addComponent(editUniverseButton)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+                .addGap(8, 8, 8)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                    .addComponent(editHeroesButton, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(EditVillainButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editSquadButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel16)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(editUniverseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("List", jPanel2);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 316, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Delete", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -543,7 +717,7 @@ public class MainScreen extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 604, Short.MAX_VALUE)
+            .addGap(0, 608, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Simulate", jPanel4);
@@ -562,86 +736,126 @@ public class MainScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void typeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeInputActionPerformed
-        int selectedIndex = typeInput.getSelectedIndex();
-        System.out.println(selectedIndex);
-        switch(selectedIndex){
-            case 0://Normal
-                visibleMutantProperties(false);
-                visibleRadioactiveProperties(false);
-                visibleExtraterrestreProperties(false);
-                visibleDeidadProperties(false);
-                visibleAlienProperties(false);
-                visibleSuperhumanProperties(false);
-                break;
-                
-            case 1://Mutante
-                visibleMutantProperties(true);
-                visibleRadioactiveProperties(false);
-                visibleExtraterrestreProperties(false);
-                visibleDeidadProperties(false);
-                visibleAlienProperties(false);
-                visibleSuperhumanProperties(false);
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
 
-                break;
-                
-            case 2://Radioactivo
-                visibleMutantProperties(false);
-                visibleRadioactiveProperties(true);
-                visibleExtraterrestreProperties(false);
-                visibleDeidadProperties(false);
-                visibleAlienProperties(false);
-                visibleSuperhumanProperties(false);
-                 break;
-                
-            case 3://Extraterrestre
-                visibleMutantProperties(false);
-                visibleRadioactiveProperties(false);
-                visibleExtraterrestreProperties(true);
-                visibleSuperhumanProperties(false);
-                visibleDeidadProperties(false);
-                visibleAlienProperties(false);
-                
-                break;
-                
-            case 4://SuperHumano
-                visibleMutantProperties(false);
-                visibleRadioactiveProperties(false);
-                visibleExtraterrestreProperties(false);
-                visibleDeidadProperties(false);
-                visibleAlienProperties(false);
-                visibleSuperhumanProperties(true);
-                break;
-                
+        availableSquadsListModel1 = new DefaultListModel();
+
+        Main.updateAvailableSquads();
+        for (Squad availableSquad : Main.availableSquads) {
+            availableSquadsListModel1.addElement(availableSquad.getName());
         }
-    }//GEN-LAST:event_typeInputActionPerformed
+        availableSquadsList.setModel(availableSquadsListModel1);
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
-    private void addMutantFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMutantFactorActionPerformed
-        String mutantFactor = JOptionPane.showInputDialog(this,"Ingrese el factor mutante: ");
-        listModel1.addElement(mutantFactor);
-        mutantFactorsList.setModel(listModel1);
-    }//GEN-LAST:event_addMutantFactorActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        createUniverse();
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void removeMutantFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMutantFactorActionPerformed
-        int selectedIndex = mutantFactorsList.getSelectedIndex();
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        if(universeSquadsListModel1.getSize() > 0){
+
+            Object otro = availableSquadsList.getModel().getElementAt( availableSquadsList.getSelectedIndex());
+
+            if(squadExists(otro)){
+                JOptionPane.showMessageDialog(this, "Ese squad ya esta agregado");
+            }else{
+                universeSquadsListModel1.addElement( availableSquadsListModel1.getElementAt( availableSquadsList.getSelectedIndex() ) );
+                universeSquadsList.setModel(universeSquadsListModel1);
+            }
+
+        }else{
+            universeSquadsListModel1.addElement( availableSquadsListModel1.getElementAt( availableSquadsList.getSelectedIndex() ) );
+            universeSquadsList.setModel(universeSquadsListModel1);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void removeMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMemberActionPerformed
+        int selectedIndex = squadMembersList.getSelectedIndex();
         if(selectedIndex != -1){
-            listModel1.remove(selectedIndex);
+            squadMembersListModel1.remove(selectedIndex);
         }
-    }//GEN-LAST:event_removeMutantFactorActionPerformed
+    }//GEN-LAST:event_removeMemberActionPerformed
+
+    private void addMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMemberActionPerformed
+
+        if(squadMembersListModel1.getSize()>0){
+            for (int i = 0; i < squadMembersListModel1.getSize(); i++) {
+                Object actual = squadMembersListModel1.getElementAt(i);
+                Object otro = availablesList.getModel().getElementAt( availablesList.getSelectedIndex());
+
+                if( actual.equals(otro)){
+                    JOptionPane.showMessageDialog(this, "Ya agrego a esa persona");
+                    break;
+                }else{
+                    squadMembersListModel1.addElement( availablesList.getModel().getElementAt(availablesList.getSelectedIndex()) );
+                    squadMembersList.setModel(squadMembersListModel1);
+                    break;
+                }
+            }
+        }else{
+            squadMembersListModel1.addElement( availablesList.getModel().getElementAt(availablesList.getSelectedIndex()) );
+            squadMembersList.setModel(squadMembersListModel1);
+        }
+        
+        
+        String[] villains = new String[squadMembersList.getModel().getSize()];
+
+        for (int x = 0; x < squadMembersList.getModel().getSize(); x++) {
+            villains[x] = squadMembersList.getModel().getElementAt(x);
+        }
+
+        DefaultComboBoxModel villainsListModel = new DefaultComboBoxModel(villains);
+        leaderInput.setModel(villainsListModel);
+        
+    }//GEN-LAST:event_addMemberActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        createSquad();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void heroesSquadTrueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heroesSquadTrueActionPerformed
+        villainSquadFalse.setSelected(false);
+        addMember.setEnabled(true);
+        removeMember.setEnabled(true);
+        leaderInput.setEnabled(true);
+        availablesList.setModel(heroesListModel1);
+
+        String[] heroes = new String[squadMembersList.getModel().getSize()];
+
+        for (int i = 0; i < squadMembersList.getModel().getSize(); i++) {
+            heroes[i] = squadMembersList.getModel().getElementAt(i);
+        }
+
+        DefaultComboBoxModel heroesListModel = new DefaultComboBoxModel(heroes);
+        leaderInput.setModel(heroesListModel);
+    }//GEN-LAST:event_heroesSquadTrueActionPerformed
+
+    private void villainSquadFalseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_villainSquadFalseActionPerformed
+        heroesSquadTrue.setSelected(false);
+        addMember.setEnabled(true);
+        removeMember.setEnabled(true);
+        leaderInput.setEnabled(true);
+
+        availablesList.setModel(villainsListModel1);
+
+        String[] villains = new String[squadMembersList.getModel().getSize()];
+
+        for (int i = 0; i < squadMembersList.getModel().getSize(); i++) {
+            villains[i] = squadMembersList.getModel().getElementAt(i);
+        }
+
+        DefaultComboBoxModel villainsListModel = new DefaultComboBoxModel(villains);
+        leaderInput.setModel(villainsListModel);
+    }//GEN-LAST:event_villainSquadFalseActionPerformed
+
+    private void leaderInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaderInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_leaderInputActionPerformed
 
     private void superpowersInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_superpowersInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_superpowersInputActionPerformed
-
-    private void deidadInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deidadInputActionPerformed
-        if(deidadInput.isSelected()){
-            visibleDeidadProperties(true);
-            alienInput.setSelected(false);
-            visibleAlienProperties(false);
-        }else{
-            visibleDeidadProperties(false);
-        }
-    }//GEN-LAST:event_deidadInputActionPerformed
 
     private void alienInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alienInputActionPerformed
         if(alienInput.isSelected()){
@@ -653,32 +867,108 @@ public class MainScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_alienInputActionPerformed
 
+    private void deidadInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deidadInputActionPerformed
+        if(deidadInput.isSelected()){
+            visibleDeidadProperties(true);
+            alienInput.setSelected(false);
+            visibleAlienProperties(false);
+        }else{
+            visibleDeidadProperties(false);
+        }
+    }//GEN-LAST:event_deidadInputActionPerformed
+
+    private void removeMutantFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeMutantFactorActionPerformed
+        int selectedIndex = mutantFactorsList.getSelectedIndex();
+        if(selectedIndex != -1){
+            listModel1.remove(selectedIndex);
+        }
+    }//GEN-LAST:event_removeMutantFactorActionPerformed
+
+    private void addMutantFactorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMutantFactorActionPerformed
+        String mutantFactor = JOptionPane.showInputDialog(this,"Ingrese el factor mutante: ");
+        listModel1.addElement(mutantFactor);
+        mutantFactorsList.setModel(listModel1);
+    }//GEN-LAST:event_addMutantFactorActionPerformed
+
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         int selectedIndex = typeInput.getSelectedIndex();
-        
+
         switch(selectedIndex){
             case 0:
-                createNormalPerson();
-                break;
+            createNormalPerson();
+            break;
             case 1:
-                createMutant();
-                break;
+            createMutant();
+            break;
             case 2:
-                createRadioactive();
-                break;
+            createRadioactive();
+            break;
             case 3:
-                if(deidadInput.isSelected()){
-                    createDeidad();
-                }else if(alienInput.isSelected()){
-                    createAlien();
-                }
-                break;
+            if(deidadInput.isSelected()){
+                createDeidad();
+            }else if(alienInput.isSelected()){
+                createAlien();
+            }
+            break;
             case 4:
-                createSuperHuman();
-                break;
+            createSuperHuman();
+            break;
         }
-        
     }//GEN-LAST:event_createButtonActionPerformed
+
+    private void typeInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeInputActionPerformed
+        int selectedIndex = typeInput.getSelectedIndex();
+        System.out.println(selectedIndex);
+        switch(selectedIndex){
+            case 0://Normal
+            visibleMutantProperties(false);
+            visibleRadioactiveProperties(false);
+            visibleExtraterrestreProperties(false);
+            visibleDeidadProperties(false);
+            visibleAlienProperties(false);
+            visibleSuperhumanProperties(false);
+            break;
+
+            case 1://Mutante
+            visibleMutantProperties(true);
+            visibleRadioactiveProperties(false);
+            visibleExtraterrestreProperties(false);
+            visibleDeidadProperties(false);
+            visibleAlienProperties(false);
+            visibleSuperhumanProperties(false);
+
+            break;
+
+            case 2://Radioactivo
+            visibleMutantProperties(false);
+            visibleRadioactiveProperties(true);
+            visibleExtraterrestreProperties(false);
+            visibleDeidadProperties(false);
+            visibleAlienProperties(false);
+            visibleSuperhumanProperties(false);
+            break;
+
+            case 3://Extraterrestre
+            visibleMutantProperties(false);
+            visibleRadioactiveProperties(false);
+            visibleExtraterrestreProperties(true);
+            visibleSuperhumanProperties(false);
+            visibleDeidadProperties(false);
+            visibleAlienProperties(false);
+
+            break;
+
+            case 4://SuperHumano
+            visibleMutantProperties(false);
+            visibleRadioactiveProperties(false);
+            visibleExtraterrestreProperties(false);
+            visibleDeidadProperties(false);
+            visibleAlienProperties(false);
+            visibleSuperhumanProperties(true);
+            break;
+
+        }
+    }//GEN-LAST:event_typeInputActionPerformed
 
     private void typeFalseInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typeFalseInputActionPerformed
         typeTrueInput.setSelected(false);
@@ -688,7 +978,191 @@ public class MainScreen extends javax.swing.JFrame {
         typeFalseInput.setSelected(false);
     }//GEN-LAST:event_typeTrueInputActionPerformed
 
+    private void editHeroesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editHeroesButtonActionPerformed
+      Persona editablePerson = getPersonByName(heroesListModel1.getElementAt( heroesList.getSelectedIndex()).toString());
+      
+      if(editablePerson instanceof normal){
+          normal editableNormal = getNormalByName(editablePerson.getName());
+          System.out.println(editableNormal);
+          Main.EditNormal.setFields(editableNormal);
+          Main.EditNormal.setVisible(true);
+          
+      }else if(editablePerson instanceof mutant){
+          
+          Main.EditMutant.setFields(getMutantByName(editablePerson.getName()));
+          Main.EditMutant.setVisible(true);
+          
+      }else if(editablePerson instanceof radioactive){
+          Main.EditRadioactive.setFields(getRadioactiveByName(editablePerson.getName()));
+          Main.EditRadioactive.setVisible(true);
+          
+      }else if(editablePerson instanceof deidad){
+           Main.EditDeidad.setFields(getDeidadByName(editablePerson.getName()));
+          Main.EditDeidad.setVisible(true);
+      }else if(editablePerson instanceof alien){
+            Main.EditAlien.setFields(getAlienByName(editablePerson.getName()));
+          Main.EditAlien.setVisible(true);
+      }else if(editablePerson instanceof superHuman){
+           Main.EditSuperHuman.setFields(getSuperHumanByName(editablePerson.getName()));
+          Main.EditSuperHuman.setVisible(true);
+      }
+    }//GEN-LAST:event_editHeroesButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      Persona editablePerson = getPersonByName(heroesListModel1.getElementAt( heroesList.getSelectedIndex()).toString());
+      
+      int selectedIndex = heroesList.getSelectedIndex();
+        if(selectedIndex != -1){
+            heroesListModel1.remove(selectedIndex);
+      }
+        
+      if(editablePerson instanceof normal){
+          normal editableNormal = getNormalByName(editablePerson.getName());
+          Main.normals.remove(editableNormal);
+          Main.allPeople.remove(editableNormal);
+      }else if(editablePerson instanceof mutant){
+          
+        Main.mutants.remove(getMutantByName(editablePerson.getName()));
+        Main.allPeople.remove(getMutantByName(editablePerson.getName()));
+
+          
+      }else if(editablePerson instanceof radioactive){
+          Main.radioactives.remove(getRadioactiveByName(editablePerson.getName()));
+          
+          
+      }else if(editablePerson instanceof deidad){
+           Main.deidades.remove(getDeidadByName(editablePerson.getName()));
+          
+          
+      }else if(editablePerson instanceof alien){
+            Main.aliens.remove(getAlienByName(editablePerson.getName()));
+         
+          
+      }else if(editablePerson instanceof superHuman){
+           Main.superHumans.remove(getSuperHumanByName(editablePerson.getName()));
+        
+      }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+   
+    private mutant getMutantByName(String name){
+        for (mutant mutant : Main.mutants) {
+            if(mutant.getName().equals(name)){
+                return mutant;
+            }
+        }
+        return null;
+    }
+    
+    private normal getNormalByName(String name){
+        for (normal normal : Main.normals) {
+            if(normal.getName().equals(name)){
+                return normal;
+            }
+        }
+        return null;
+    }
+    
+    private radioactive getRadioactiveByName(String name){
+        for (radioactive radioactive : Main.radioactives) {
+            if(radioactive.getName().equals(name)){
+                return radioactive;
+            }
+        }
+        return null;
+    }
+    
+    private deidad getDeidadByName(String name){
+        for (deidad mutant : Main.deidades) {
+            if(mutant.getName().equals(name)){
+                return mutant;
+            }
+        }
+        return null;
+    }
+    
+    private alien getAlienByName(String name){
+        for (alien mutant : Main.aliens) {
+            if(mutant.getName().equals(name)){
+                return mutant;
+            }
+        }
+        return null;
+    }
+    
+    private superHuman getSuperHumanByName(String name){
+        for (superHuman mutant : Main.superHumans) {
+            if(mutant.getName().equals(name)){
+                return mutant;
+            }
+        }
+        return null;
+    }
+    
+    
+    private Boolean squadExists(Object otro){
+       
+        for (int i = 0; i < universeSquadsListModel1.getSize(); i++) {
+            Object actual = universeSquadsListModel1.getElementAt(i);
+            if( actual.equals(otro)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private Persona getPersonByName(String name){
+        for (Persona persona : Main.allPeople) {
+            if(persona.getName().equals(name)){
+                return persona;
+            }
+        }
+        return null;
+    }
+    
+    private Squad getSquadByName(String name){
+        for (Squad squad : Main.squads) {
+            if(squad.getName().equals(name)){
+                return squad;
+            }
+        }
+        return null;
+    }
+    
     //------------------CREATE METHODS------------------------------------------
+    
+    private void createUniverse(){
+        String name = universeNameInput.getText();
+        ArrayList<Squad> squads = new ArrayList();
+        
+        for (int i = 0; i < universeSquadsList.getModel().getSize(); i++) {
+            squads.add( getSquadByName( universeSquadsList.getModel().getElementAt(i) ) );
+        }
+        
+        Universe newUniverse = new Universe(name,squads);
+        addUniverse(newUniverse);
+        JOptionPane.showMessageDialog(this, "Universo creado");
+    }
+    
+    private void createSquad(){
+        String name = squadNameInput.getText();
+        String base = baseInput.getText();
+        Persona leader = getPersonByName( leaderInput.getSelectedItem().toString() );
+        Boolean type =  getHeroOrVillainSquad();
+        ArrayList<Persona> members = new ArrayList();
+        
+        for (int i = 0; i < squadMembersList.getModel().getSize(); i++) {
+            Persona persona = getPersonByName( squadMembersList.getModel().getElementAt(i) );
+            members.add(persona);
+        }
+        
+        Squad newSquad = new Squad(name, base,leader,type);
+        newSquad.setMembers(members);
+        addSquad(newSquad);
+        
+        setEmptySquadInputs();
+        JOptionPane.showMessageDialog(this, "Squad creado con exito");
+    }
     
     private void createSuperHuman(){
         String name = nameInput.getText();
@@ -702,6 +1176,7 @@ public class MainScreen extends javax.swing.JFrame {
         String superpower = superpowersInput.getText();
         superHuman newSuperHuman = new superHuman(superpower,name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad);
         addPerson(type,newSuperHuman);
+        Main.superHumans.add(newSuperHuman);
     }
     
     private void createAlien(){
@@ -718,7 +1193,7 @@ public class MainScreen extends javax.swing.JFrame {
         alien newAlien = new alien(name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad,planet);
         
         addPerson(type,newAlien);
-        
+        Main.aliens.add(newAlien);
     }
     
     private void createDeidad(){
@@ -736,7 +1211,7 @@ public class MainScreen extends javax.swing.JFrame {
         deidad newDeidad = new deidad(hasBeliever,mythology,name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad);
         
         addPerson(type,newDeidad);
-        
+        Main.deidades.add(newDeidad);
     }
     
     //Crear radioactivo
@@ -753,6 +1228,7 @@ public class MainScreen extends javax.swing.JFrame {
         String accidentType = accidentTypeInput.getText();
         radioactive newRadioactive = new radioactive(age,accidentType,name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad);
         addPerson(type,newRadioactive);
+        Main.radioactives.add(newRadioactive);
     }
     
     //Crear mutante
@@ -774,6 +1250,7 @@ public class MainScreen extends javax.swing.JFrame {
         mutant newMutant = new mutant(name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad);
         newMutant.setMutantFactors(mutantFactors);
         addPerson(type,newMutant);
+        Main.mutants.add(newMutant);
     }
     
     //Crear normal 
@@ -788,6 +1265,7 @@ public class MainScreen extends javax.swing.JFrame {
         Boolean hasSquad = false;
         normal newNormal = new normal(name,power,weakness,type,strength,mentalStrength,physicalStrength,hasSquad);
         addPerson(type,newNormal);
+        Main.normals.add(newNormal);
     }
     
     //--------------CREATHE METHOS END-------------------------------------------
@@ -803,16 +1281,45 @@ public class MainScreen extends javax.swing.JFrame {
         setEmptyInputs();
     }
     
-    private void addHero(Persona hero){
+    public void addUniverse(Universe universe){
+        Main.universes.add(universe);
+        universesListModel1.addElement(universe.getName());
+        universesList.setModel(universesListModel1);
+    }
+    
+    public void addSquad(Squad squad){
+        Main.squads.add(squad);
+        squadsListModel1.addElement(squad.getName());
+        squadsList.setModel(squadsListModel1);
+    }
+    
+    
+    public void addHero(Persona hero){
         Main.heroes.add(hero);
+        Main.allPeople.add(hero);
         heroesListModel1.addElement(hero.getName());
         heroesList.setModel(heroesListModel1);
     }
     
-    private void addVillain(Persona villain){
+    public void addVillain(Persona villain){
         Main.villains.add(villain);
+        Main.allPeople.add(villain);
         villainsListModel1.addElement(villain.getName());
         villainsList.setModel(villainsListModel1);
+    }
+    
+    private void setEmptySquadInputs(){
+        squadNameInput.setText("");
+        baseInput.setText("");
+        villainSquadFalse.setSelected(false);
+        heroesSquadTrue.setSelected(false);
+        
+        DefaultComboBoxModel villainsListModel = new DefaultComboBoxModel();
+        leaderInput.setModel(villainsListModel);
+
+        DefaultListModel emptyListModel1 = new DefaultListModel();
+        squadMembersList.setModel(emptyListModel1);
+        availablesList.setModel(emptyListModel1);
     }
     
     private void setEmptyInputs(){
@@ -831,6 +1338,15 @@ public class MainScreen extends javax.swing.JFrame {
             return true;
         }
     }
+    
+    private boolean getHeroOrVillainSquad(){
+        if(villainSquadFalse.isSelected()){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
     
     public void visibleMutantProperties(Boolean booleano){
         jLabel7.setVisible(booleano);
@@ -903,19 +1419,31 @@ public class MainScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton EditVillainButton;
     private javax.swing.JTextField accidentTypeInput;
-    public javax.swing.JButton addMutantFactor;
+    private javax.swing.JButton addMember;
+    private javax.swing.JButton addMutantFactor;
     private javax.swing.JSpinner ageInput;
     private javax.swing.JRadioButton alienInput;
+    private javax.swing.JList<String> availableSquadsList;
+    private javax.swing.JList<String> availablesList;
+    private javax.swing.JTextField baseInput;
     private javax.swing.JButton createButton;
     private javax.swing.JRadioButton deidadInput;
+    private javax.swing.JButton editHeroesButton;
+    private javax.swing.JButton editSquadButton;
+    private javax.swing.JButton editUniverseButton;
     private javax.swing.JRadioButton hasBelievers;
     private javax.swing.JList<String> heroesList;
+    private javax.swing.JRadioButton heroesSquadTrue;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -929,45 +1457,54 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    public javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JComboBox<String> leaderInput;
     private javax.swing.JSpinner mentalStrengthInput;
-    public javax.swing.JList<String> mutantFactorsList;
+    private javax.swing.JList<String> mutantFactorsList;
     private javax.swing.JTextField mythologyInput;
     private javax.swing.JTextField nameInput;
     private javax.swing.JSpinner physicalStrengthInput;
     private javax.swing.JTextField planetInput;
     private javax.swing.JTextField powerInput;
-    public javax.swing.JButton removeMutantFactor;
+    private javax.swing.JButton removeMember;
+    private javax.swing.JButton removeMutantFactor;
     private javax.swing.JList<String> squadMembersList;
+    private javax.swing.JTextField squadNameInput;
     private javax.swing.JList<String> squadsList;
     private javax.swing.JSpinner strengthInput;
     private javax.swing.JTextField superpowersInput;
     private javax.swing.JRadioButton typeFalseInput;
     private javax.swing.JComboBox<String> typeInput;
     private javax.swing.JRadioButton typeTrueInput;
+    private javax.swing.JTextField universeNameInput;
+    private javax.swing.JList<String> universeSquadsList;
     private javax.swing.JList<String> universesList;
+    private javax.swing.JRadioButton villainSquadFalse;
     private javax.swing.JList<String> villainsList;
     private javax.swing.JTextField weaknessInput;
     // End of variables declaration//GEN-END:variables
